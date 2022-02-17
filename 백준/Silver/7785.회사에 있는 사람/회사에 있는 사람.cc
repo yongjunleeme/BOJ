@@ -1,26 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n;
-unordered_map<string, string> m;
-vector <string> ans;
+unordered_set<string> s;
+
 int main(void){
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  int n;
   cin >> n;
-  string a, b;
   while(n--){
-    cin >> a >> b;
-    m[a] = b;
+    string name, log;
+    cin >> name >> log;
+    if(log == "enter") s.insert(name);
+    else s.erase(name);
   }
-  int num = 0;
-  for(auto e : m){
-    if(e.second == "enter"){
-      ans.push_back(e.first);
-      num++;
-    }
-  }
-  sort(ans.begin(), ans.end());
-  for(int i = num - 1; i >= 0 ; i--) cout << ans[i] << '\n';
-  
+  vector<string> ans(s.begin(), s.end());
+  sort(ans.begin(), ans.end(), greater<string>());
+  for(auto x : ans) cout << x << '\n';
 }

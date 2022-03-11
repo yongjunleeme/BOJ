@@ -2,10 +2,10 @@
 using namespace std;
 
 int n;
-long long a[100005];
-int cnt = 0;
-long long mxval = -(1ll << 62) - 1; // 가장 많이 나온 수
+int cnt = 1;
+long long mxval = -(1ll << 62) - 1;
 long long mxcnt = 0;
+long long a[100005];
 
 int main(void){
   ios::sync_with_stdio(0);
@@ -13,8 +13,9 @@ int main(void){
   cin >> n;
   for(int i = 0; i < n; i++) cin >> a[i];
   sort(a, a+n);
-  for(int i = 0; i < n; i++){
-    if(i == 0 || a[i-1] == a[i]) cnt++;
+  a[n] = (1ll << 62) + 1;
+  for(int i = 1; i <= n; i++){
+    if(a[i-1] == a[i]) cnt++;
     else{
       if(cnt > mxcnt){
         mxcnt = cnt;
@@ -23,6 +24,5 @@ int main(void){
       cnt = 1;
     }
   }
-  if(cnt > mxcnt) mxval = a[n-1];
   cout << mxval;
 }

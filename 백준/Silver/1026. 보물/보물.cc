@@ -2,8 +2,8 @@
 using namespace std;
 
 int n;
-int a[105];
-int b[105];
+int a[55];
+int b[55];
 
 int main(void) {
   ios::sync_with_stdio(0);

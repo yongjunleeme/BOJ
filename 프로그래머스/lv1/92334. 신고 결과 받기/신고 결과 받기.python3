@@ -1,0 +1,24 @@
+def solution(id_list, report, k):
+    
+    n = len(id_list)
+    set_list = [set() for _ in range(n)]
+    # set_list = [{}]
+    
+    id_idx = {}
+    
+    for i in range(n):
+        id_idx[id_list[i]] = i    
+    
+    for i in report:
+        id1, id2 = i.split()
+        set_list[id_idx[id2]].add(id_idx[id1])
+    
+    
+    answer = [0] * n
+    for i in range(n):
+        if len(set_list[i]) < k:
+            continue
+        for x in set_list[i]:
+            answer[x] += 1       
+    
+    return answer

@@ -16,7 +16,7 @@ int main(void){
   cin.tie(0);
   
   cin >> n;
-  priority_queue<int, vector<int>, cmp> pq; // 최소힙
+  priority_queue<int, vector<int>, cmp> pq;    
   while(n--){
     int a;
     cin >> a;

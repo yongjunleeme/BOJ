@@ -1,38 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
 
-int n, m, cnt = 0;
-bool vis[102];
-vector <int> v[102];
+int v, e, a, b;
+vector <int> adj[105];
+int vis[105];
+int ans = 0;
 
-void func(int k){
-  queue <int> q;
-  q.push(k);
-  vis[k] = 1;
-  while(!q.empty()){
-    cnt++;
-    int cur = q.front(); q.pop();
-    for(int i = 0; i < v[cur].size(); i++){
-      int nk = v[cur][i];
-      if(vis[nk]) continue;
-      vis[nk] = 1;
-      q.push(nk);
-    }
+void dfs(int cur){
+  vis[cur] = 1;
+  for(auto nxt: adj[cur]){
+    if(vis[nxt]) continue;
+    ans++;
+    dfs(nxt);
   }
 }
 
 int main(void){
   ios::sync_with_stdio(0);
   cin.tie(0);
-  cin >> n >> m;
-  for(int i = 0; i < m; i++){
-    int a, b;
+  
+  cin >> v >> e;
+  while(e--){
     cin >> a >> b;
-    v[a].push_back(b);
-    v[b].push_back(a);
+    adj[a].push_back(b);
+    adj[b].push_back(a);
   }
-  func(1);
-  cout << cnt-1;
+  
+  dfs(1);
+  cout << ans;
 }

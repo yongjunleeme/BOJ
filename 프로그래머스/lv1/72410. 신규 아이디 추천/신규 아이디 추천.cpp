@@ -1,69 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string lower(string id){
-    string s;
-    for(auto i: id)
-        s += tolower(i);
-    return s;
-}
-
-string check2(string id){
-    string ret;
-    for(int i = 0; i < id.size(); i++){
-        char a = id[i];
-        if(!isdigit(a) && !isalpha(a) && a != '.' && a != '_' && a != '-' && a != '.') continue;
-        ret += a;
-    }                
-    return ret;
-}
-
-string check3(string id){
-    string ret;
-    if(id.size() > 0 ) ret += id[0];
-    for(int i = 1; i < id.size(); i++){
-        if(id[i-1] == '.' && id[i] == '.') continue;
-        ret += id[i];
-        
-    }
-    return ret;
-}
-
-string check4(string id){
-    
-    if(id.size() > 0){        
-        if(id[0] == '.') id.erase(id.begin(), id.begin()+1);        
-    }
-    if(id.size() > 0){
-        if(id[id.size()-1] == '.') id.pop_back();
-    }
-    return id;
-}
-
-
 string solution(string new_id) {
-    string ans = lower(new_id);
+    string id1;
+    for(auto i : new_id) id1 += tolower(i);
     
-    ans = check2(ans);    
+    string step2_filter = "0123456789abcdefghijklmnopqrstuvwxyz-_.";
     
-    ans = check3(ans);    
+    string id2;
+    for(auto i : id1){
+        if(find(step2_filter.begin(), step2_filter.end(), i) != step2_filter.end()) id2 += i;
+    }
     
-    ans = check4(ans);
-    
-    if(ans.size() == 0) ans+="a";
-    
-    if(ans.size() > 15) ans = ans.substr(0, 15);
-    
-    if(ans[ans.size()-1] == '.') ans.pop_back();
-    
-    if(ans.size() < 3){
-        char a = ans[ans.size() -1];
-        while(1){
-            if(ans.size() >= 3) break;
-            ans += a;
+    string id3;
+    for(auto i : id2){
+        if(i != '.') id3 += i;
+        else {
+            if(!id3.empty() && id3.back() == '.') continue;
+            id3 += i;
         }
     }
     
+    string id4;
+    for(int i = 0; i < id3.size(); i++){
+        if((i == 0 || i == id3.size()) && id3[i] == '.') continue;
+        id4 += id3[i];
+    }
     
-    return ans;
+    string id5 = id4;
+    if(id4.empty()) id5 = "a";    
+    
+    string id6 = id5.substr(0, 15);
+    if(id6.back() == '.') id6.pop_back();
+    
+    string id7 = id6;
+    while(id7.size() < 3){
+        id7 += id7.back();                
+    }
+       
+    
+    return id7;           
 }

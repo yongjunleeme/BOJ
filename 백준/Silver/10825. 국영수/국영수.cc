@@ -1,20 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(void) {
+int n;
+vector <tuple<int, int, int, string>> v;
+
+int main(void){
   ios::sync_with_stdio(0);
   cin.tie(0);
-
-  int N;
-  cin >> N;
-  vector<tuple<int, int, int, string>> students;
-  while (N--) {
-    string name;
-    int kor, eng, math;
-    cin >> name >> kor >> eng >> math;
-    students.push_back({-kor, eng, -math, name});
+  cin >> n;
+  for(int i = 0; i < n; i++){
+    string d;
+    int a, b, c;
+    cin >> d >> a >> b >> c;
+    v.push_back({-a,b,-c,d});
   }
-  sort(students.begin(), students.end());
-  for (auto& s : students)
-    cout << get<3>(s) << '\n';
+  sort(v.begin(), v.end());
+  for(auto&i : v) cout << get<3>(i) << '\n';
 }

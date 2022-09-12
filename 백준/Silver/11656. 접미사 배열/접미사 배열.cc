@@ -1,20 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string st;
+string s;
 vector<string> v;
 
-int main(void) {
+int main(void){
   ios::sync_with_stdio(0);
   cin.tie(0);
-
-  cin >> st;
-  int stringlen = st.length();
-  for(int i = 0; i < stringlen; i++) {
-    string temp = st.substr(i);
-    v.push_back(temp);
+  cin >> s;
+  for(int i = 0; i < s.size(); i++){
+    string a = s.substr(i, s.size() - i);
+    v.push_back(a);
   }
   sort(v.begin(), v.end());
   for(auto i : v) cout << i << '\n';
-  return 0;
 }

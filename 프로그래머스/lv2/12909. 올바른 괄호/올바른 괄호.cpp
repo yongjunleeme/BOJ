@@ -1,20 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-stack <char> a;
+stack <char> stk;
 
-bool solution(string s)
-{
+bool solution(string s){
     for(int i = 0; i < s.size(); i++){
-        if(s[i] == '(') a.push(s[i]);
-        else {
-            if(!a.empty()){
-                a.pop();
-            }else{
-                return false;
-            }
+        if(s[i] == '(' || stk.empty()) stk.push(s[i]);
+        else if(s[i] == ')'){
+            if(stk.top() == '(') stk.pop();
+            else return false;
         }
     }
-    if(a.empty()) return true;
+    if(stk.empty()) return true;
     else return false;
 }

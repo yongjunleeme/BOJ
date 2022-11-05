@@ -17,9 +17,9 @@ int solution(vector<int> priorities, int location) {
             if(q.front().second == location) return cnt;
             q.pop(); pq.pop();            
         } else {
-            auto a = q.front();
+            auto a = q.front(); q.pop();
             q.push({a.first, a.second});
-            q.pop();
+            
         }
     }
     

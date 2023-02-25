@@ -1,12 +1,12 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int mn = 10000;
-        int mx = 0;
-        for(int i = 0; i < prices.size(); i++){
-            mn = min(mn, prices[i]);
-            mx = max(mx, prices[i] - mn);
+        int d[100005];
+        fill(d, d+10005, 0);
+        for(int i = 1; i < prices.size(); i++){
+            d[i] = max(d[i-1] + prices[i] - prices[i-1], 0);
         }
-        return mx;
+        return *max_element(d, d+10005);
+        
     }
 };
